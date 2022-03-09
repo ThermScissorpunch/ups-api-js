@@ -31,38 +31,36 @@ export const LocatorAPI = superclass =>
             const xml =
                 getXMLHeader(this.username, this.password, this.license) +
                 `<?xml version="1.0"?>
-                <LocatorRequest>
-                    <Request>
-                        <RequestAction>Locator</RequestAction>
-                        <RequestOption>64</RequestOption>
-                    </Request>
-                    <OriginAddress>
-                        <AddressKeyFormat>
-                            ${consignee ? `<ConsigneeName>${consignee}</ConsigneeName>` : ""}
-                            <AddressLine>${addressLine}</AddressLine>
-                            <PoliticalDivision2>${city}</PoliticalDivision2>
-                            <PostcodePrimaryLow>${postalCode}</PostcodePrimaryLow>
-                            <CountryCode>${countryCode}</CountryCode>
-                        </AddressKeyFormat>
-                    </OriginAddress>
-                    <Translate>
-                        <Locale>${locale}</Locale>
-                    </Translate>
-                    <UnitOfMeasurement>
-                        <Code>${metric ? "KM" : "MI"}</Code>
-                    </UnitOfMeasurement>
-                    <LocationSearchCriteria>
-                        <SearchOption>
-                            <OptionType>
-                                <Code>01</Code>
-                            </OptionType>
-                        </SearchOption>
-                        <MaximumListSize>1</MaximumListSize>
-                        <SearchRadius>${radius}</SearchRadius>
-                        <AccessPointSearch>
-                            <AccessPointStatus>01</AccessPointStatus>
-                        </AccessPointSearch>
-                    </LocationSearchCriteria>
+                <LocatorRequest xml:lang="en-US">
+                  <Request>
+                  <RequestAction>Locator</RequestAction>
+                  <RequestOption>64</RequestOption>
+                </Request>
+                <OriginAddress>
+                <AddressKeyFormat>
+                <CountryCode>${countryCode}</CountryCode>
+                <PostcodePrimaryLow>${postalCode}</PostcodePrimaryLow>
+                <AddressLine>${postalCode}</AddressLine>
+                </AddressKeyFormat>
+                </OriginAddress>
+                <Translate>
+                  <Locale>${locale}</Locale>
+                </Translate>
+                <UnitOfMeasurement>
+                  <Code>KM</Code>
+                </UnitOfMeasurement>
+                <LocationSearchCriteria>
+                  <SearchOption>
+                  <OptionType>
+                  <Code>01</Code>
+                  </OptionType>
+                  <OptionCode>
+                  <Code>018</Code>
+                  </OptionCode>
+                  </SearchOption>
+                  <MaximumListSize>30</MaximumListSize>
+                  <SearchRadius>50</SearchRadius>
+                  </LocationSearchCriteria>
                 </LocatorRequest>`;
             return xml;
         }
